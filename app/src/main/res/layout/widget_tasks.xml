@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tasks_widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <!-- Header bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/widget_header_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="МПК • Задачи и ДЗ"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/widget_tasks_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_badge_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:text="3 активных"
+            android:textColor="#0D3B66"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="4dp"
+        android:text="Актуальные задания к следующему уроку:"
+        android:textColor="#486284"
+        android:textSize="11sp" />
+
+    <!-- Task 1 -->
+    <LinearLayout
+        android:id="@+id/task_row_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/widget_card_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/t1_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_badge_bg"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="1dp"
+            android:text="ДЗ"
+            android:textColor="#0D3B66"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t1_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Решить задачи по SQL (JOIN, GROUP BY)"
+            android:textColor="#1F2937"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t1_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="К следующему"
+            android:textColor="#6B7280"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <!-- Task 2 -->
+    <LinearLayout
+        android:id="@+id/task_row_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/widget_card_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/t2_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_amber_badge"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="1dp"
+            android:text="КУРСОВАЯ"
+            android:textColor="#856404"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t2_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Проектирование ИС учета склада"
+            android:textColor="#1F2937"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t2_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="до 20.11"
+            android:textColor="#DC2626"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Task 3 -->
+    <LinearLayout
+        android:id="@+id/task_row_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/widget_card_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/t3_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_badge_bg"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="1dp"
+            android:text="ПРАКТИКА"
+            android:textColor="#0D3B66"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t3_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Практическая №3: Wireshark"
+            android:textColor="#1F2937"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/t3_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="К следующему"
+            android:textColor="#6B7280"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+    <!-- Empty state text (hidden by default) -->
+    <TextView
+        android:id="@+id/widget_tasks_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Все задания выполнены! 🌟"
+        android:textColor="#6B7280"
+        android:textSize="13sp"
+        android:visibility="gone" />
+
+</LinearLayout>

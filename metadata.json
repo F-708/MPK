@@ -1,0 +1,6 @@
+{
+  "name": "МПК Расписание",
+  "description": "Расписание уроков, виджеты, задачи, разделение по подгруппам и статистика преподавателей МПК",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

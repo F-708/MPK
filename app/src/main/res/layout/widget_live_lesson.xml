@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/live_widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!-- Top status bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/live_status_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_amber_badge"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="2dp"
+            android:text="СЕЙЧАС ИДЕТ УРОК"
+            android:textColor="#856404"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/live_time_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Осталось: 24 мин"
+            android:textColor="#0D3B66"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Main subject title -->
+    <TextView
+        android:id="@+id/live_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="Технология разработки ПО"
+        android:textColor="#0D3B66"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <!-- Details row: lesson number, room, teacher -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/live_lesson_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 урок (09:25 - 10:10)"
+            android:textColor="#4B5563"
+            android:textSize="11sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/live_classroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/widget_badge_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="3dp"
+            android:text="каб. 314"
+            android:textColor="#0D3B66"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Next up line -->
+    <TextView
+        android:id="@+id/live_next_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Далее: Иностранный язык (215 / 308)"
+        android:textColor="#6B7280"
+        android:textSize="10sp" />
+
+</LinearLayout>
