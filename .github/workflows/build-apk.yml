@@ -6,9 +6,16 @@ on:
       - '**'
     tags:
       - 'v*'
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
   pull_request:
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
   workflow_dispatch:
 
+# Cancel in-progress runs on the same branch to save GitHub Actions runner minutes
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -17,6 +24,7 @@ jobs:
   build:
     name: Build Debug APK
     runs-on: ubuntu-latest
+    timeout-minutes: 15 # Protect against runaway builds consuming free minute quotas
     permissions:
       contents: write
 
@@ -30,17 +38,38 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
+      # Caches Gradle dependencies, wrapper, and build cache to drastically speed up builds & save minutes
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: false
 
-      - name: Restore Debug Keystore
+      - name: Prepare Debug Keystore
         run: |
-          if [ -f debug.keystore.base64 ] && [ ! -f debug.keystore ]; then
-            echo "Decoding debug.keystore.base64..."
-            base64 -d debug.keystore.base64 > debug.keystore
+          # 1. Try decoding from debug.keystore.base64 if present
+          if [ -f debug.keystore.base64 ] && [ -s debug.keystore.base64 ]; then
+            echo "Found debug.keystore.base64, attempting to decode..."
+            (base64 -d debug.keystore.base64 > debug.keystore 2>/dev/null) || (base64 --decode debug.keystore.base64 > debug.keystore 2>/dev/null) || true
           fi
 
-      - name: Setup Environment File
+          # 2. If debug.keystore is still missing or empty, generate one immediately with matching alias/passwords
+          if [ ! -f debug.keystore ] || [ ! -s debug.keystore ]; then
+            echo "debug.keystore not present or empty. Generating standard debug keystore via keytool..."
+            keytool -genkeypair -v \
+              -keystore debug.keystore \
+              -storepass android \
+              -alias androiddebugkey \
+              -keypass android \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -dname "CN=Android Debug,O=Android,C=US"
+          fi
+
+          echo "Keystore verified successfully:"
+          ls -la debug.keystore
+
+      - name: Prepare Environment File
         run: |
           if [ -f .env.example ] && [ ! -f .env ]; then
             cp .env.example .env
@@ -52,15 +81,18 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build APK with Gradle
-        run: ./gradlew :app:assembleDebug --stacktrace
+        run: ./gradlew :app:assembleDebug --stacktrace --no-daemon
 
+      # Retention is set to 7 days to preserve GitHub account storage limits (500 MB cap)
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: MPK-Schedule-Debug-APK
           path: app/build/outputs/apk/debug/*.apk
-          retention-days: 30
+          retention-days: 7
+          if-no-files-found: error
 
+      # Automatically publish a GitHub Release when a tag is pushed (e.g. git tag v1.0.0)
       - name: Create GitHub Release (on tag)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
